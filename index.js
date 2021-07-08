@@ -19,6 +19,12 @@ app.post('/', (req, res) => {
     
     const { name, email, message } = req.body;
 
+    if(!name || !email || !message) {
+        return res.status(400).json({
+            errorMessage: "Please enter in all required fields"
+        })
+    }
+
     const mailOptions = {
         from: email,
         to: process.env.EMAIL,
@@ -31,6 +37,9 @@ app.post('/', (req, res) => {
             console.log(err)
         } else {
             console.log('Email sent: ' + info.response)
+            return res.status(200).json({
+                success: "Thank you for reaching out! I will get back to you shortly."
+            })
         }
     })
     
