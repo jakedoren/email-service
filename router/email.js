@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const nodemailer = require('nodemailer');
+const validator = require('email-validator')
 
 const transporter = nodemailer.createTransport({
     service: process.env.SERVICE,
@@ -17,6 +18,12 @@ router.post('/', (req, res) => {
         return res.status(400).json({
             errorMessage: "Please enter in all required fields"
         })
+    }
+
+    const checkedEmail = validator.validate(email)
+
+    if(!checkedEmail) {
+        return res.status(400).json({errorMessage: "Please enter in a valid email address"})
     }
 
     const mailOptions = {
