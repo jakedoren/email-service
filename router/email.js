@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
     transporter.sendMail(mailOptions, (err, info) => {
         if(err) {
             console.log(err)
+            return res.status(500).json({errorMessage: "Oops, Something went wrong."})
         } else {
             console.log('Email sent: ' + info.response)
             return res.status(200).json({
