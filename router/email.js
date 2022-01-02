@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 })
 
 router.get('/', (req, res) => {
-    res.status(400).json({success: "Welcome to the contact service"})
+    res.status(200).json({success: "Welcome to the contact service"})
 })
 
 router.post('/', (req, res) => {
